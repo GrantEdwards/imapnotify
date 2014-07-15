@@ -44,7 +44,10 @@ terminates.
 
 Configuration is done through a config file and command-line options.
 
-Command line Options:
+Command line Options
+--------------------
+
+The available command line options are shown below
 
     -h, --help                          show this help message and exit
     -l FILE, --log=FILE                 write log to FILE
@@ -56,13 +59,18 @@ On startup, imapnotify will attempt to read a config file from
 $HOME/.imapnotifyrc or from the path specified with the
 -f/--config-file option.
 
+Config File
+-----------
+
 The config file is parsed using the Python standard library's
 configparser module:
 
  http://docs.python.org/release/2.6.6/library/configparser.html
 
 A section header of Application identifies application-wide
-settings.  The available application-wide settings are:
+settings.  
+
+### Global Application Settings
 
  * tooltips
 
@@ -118,6 +126,8 @@ settings.  The available application-wide settings are:
 
     The imapnotify window title.  Default is 'IMAP Notifier'.
 
+
+### Mailbox Configuration Settings
 
 Any section with a name other than Application defines a mailbox
 configuration.  The UI button will have the same name as the section,
