@@ -18,13 +18,13 @@ Imapnotify uses the IMAP idle command which allows the IMAP server to
 "push" notification to the client immediately upon arrival of new mail
 (or deletion of messages).  This has two advantages:
 
-  1) Much lower CPU usage compared to notifiers such as XFCE's
+  1. Much lower CPU usage compared to notifiers such as XFCE's
      mailwatch panel plugin which opens a new connection for each
      poll.  If SSL encyryption is being used, there is a significant
      amount of overhead involved in setting up a connection that is
      then only used to send a single command.
 
-  2) Lower latency notification.  The user is notified within seconds
+  2. Lower latency notification.  The user is notified within seconds
      of new mail being received.
 
 The Imapnotify UI consists of a vertical array of GTK buttons whose
@@ -46,11 +46,11 @@ Configuration is done through a config file and command-line options.
 
 Command line Options:
 
-  -h, --help                          show this help message and exit
-  -l FILE, --log=FILE                 write log to FILE
-  -v LEVEL, --verbose=LEVEL           verbosity level
-  -g GEOMETRY, --geometry=GEOMETRY    X11 geometry string
-  -f FILE, --config-file=FILE         use FILE instead of ~/.imapnotifyrc
+    -h, --help                          show this help message and exit
+    -l FILE, --log=FILE                 write log to FILE
+    -v LEVEL, --verbose=LEVEL           verbosity level
+    -g GEOMETRY, --geometry=GEOMETRY    X11 geometry string
+    -f FILE, --config-file=FILE         use FILE instead of ~/.imapnotifyrc
 
 On startup, imapnotify will attempt to read a config file from
 $HOME/.imapnotifyrc or from the path specified with the
