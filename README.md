@@ -64,59 +64,59 @@ configparser module:
 A section header of Application identifies application-wide
 settings.  The available application-wide settings are:
 
-   tooltips
+ * tooltips
 
-         If set to 'yes', the buttons will have tooltips that show how
-         many unseen messages are present.  Default is 'yes'.
+   If set to 'yes', the buttons will have tooltips that show how
+   many unseen messages are present.  Default is 'yes'.
 
-   showcount
+ * showcount
 
-         If set to 'yes', the buttons will show the number of unseen
-         messages in the button labels (when non-zero).  Default is 'yes'.
+   If set to 'yes', the buttons will show the number of unseen
+   messages in the button labels (when non-zero).  Default is 'yes'.
 
-   stick         
+ * stick         
 
-         If set to 'yes', the imapnotify window will stick to it's
-         place on the root window even when virtual desktops are
-         changed.  Default is 'no'.
+   If set to 'yes', the imapnotify window will stick to it's
+   place on the root window even when virtual desktops are
+   changed.  Default is 'no'.
 
-   decorated
+ * decorated
 
-         If set to 'yes', the window manager hints will be set to
-         allow normal window decorations (borders, buttons, etc.).
-         Default is 'yes'.
+   If set to 'yes', the window manager hints will be set to
+   allow normal window decorations (borders, buttons, etc.).
+   Default is 'yes'.
 
-   keepontop
+ * keepontop
 
-         If set to 'yes', the imapnotify window will be configured
-         to stay on top of all other application windows.  Default is
-         'no'.
+   If set to 'yes', the imapnotify window will be configured
+   to stay on top of all other application windows.  Default is
+   'no'.
 
-   keeponbottom
+ * keeponbottom
 
-         If set to 'yes', the imapnotify window will be configured
-         to stay on top of all other application windows.  Default is
-         'no'.
+   If set to 'yes', the imapnotify window will be configured
+   to stay on top of all other application windows.  Default is
+  'no'.
 
-   desktop
+ * desktop
  
-         If set to 'yes', the imapnotify window type hint will be set
-         to 'desktop'.  I'm not really sure what that does, but maybe
-         somebody has a use for it.  Default is 'no'
+   If set to 'yes', the imapnotify window type hint will be set
+   to 'desktop'.  I'm not really sure what that does, but maybe
+   somebody has a use for it.  Default is 'no'
 
-   skiptaskbar
+ * skiptaskbar
 
-         If set to 'yes', the imapnotify window will not appear in
-         desktop manager taskbars.  Default is 'no'.
+   If set to 'yes', the imapnotify window will not appear in
+   desktop manager taskbars.  Default is 'no'.
 
-   skippager
+  * skippager
 
-         If set to 'yes', the imapnotify window will not appear in
-         desktop manager pagers.  Default is 'no'.
+    If set to 'yes', the imapnotify window will not appear in
+    desktop manager pagers.  Default is 'no'.
 
-   title
+  * title
 
-         The imapnotify window title.  Default is 'IMAP Notifier'.
+    The imapnotify window title.  Default is 'IMAP Notifier'.
 
 
 Any section with a name other than Application defines a mailbox
@@ -125,76 +125,76 @@ and the buttons will appear in the same order as the configuration
 sections in the config file. Mailbox configuration settings are as
 follows:
 
-   server
+ * server
 
-         The IMAP server.
+   The IMAP server.
 
-   username
+ * username
 
-         The username to use when logging into the IMAP server.
+   The username to use when logging into the IMAP server.
 
-   password
+ * password
 
-         The password to use when logging into the IMAP server.
+   The password to use when logging into the IMAP server.
 
-   boxname
+ * boxname
 
-         The mailbox name to watch for new mail
+   The mailbox name to watch for new mail
 
-   polltime
+ * polltime
 
-         The polling period to use if the IMAP server doesn't support
-         push notification via the "idle" command.
+   The polling period to use if the IMAP server doesn't support push
+   notification via the "idle" command.
 
-   cmd
+ * cmd
 
-         The shell command to execute when the button is clicked.
+   The shell command to execute when the button is clicked.
 
-   delayedexpunge
+ * delayedexpunge
 
-         Set to true if the IMAP server is slow in expunging deleted
-         messages.  The issue that this is meant to solve is the case
-         where the user clicks a notifier button starting an MUA,
-         reads or deletes new messages, and exits.  Imapnotify will
-         re-check the mailbox status when the MUA exits.  On some
-         servers, the status won't change immediately and imapnotify
-         will still see "new" mail that has just been deleted or
-         marked read.  Setting delayedexpunge will cause imapnotify
-         to delay for a short while before re-checking the mailbox
-         status after the MUA exits.
+   Set to true if the IMAP server is slow in expunging deleted
+   messages.  The issue that this is meant to solve is the case where
+   the user clicks a notifier button starting an MUA, reads or deletes
+   new messages, and exits.  Imapnotify will re-check the mailbox
+   status when the MUA exits.  On some servers, the status won't
+   change immediately and imapnotify will still see "new" mail that
+   has just been deleted or marked read.  Setting delayedexpunge will
+   cause imapnotify to delay for a short while before re-checking the
+   mailbox status after the MUA exits.
 
-   ssl_version
+ * ssl_version
 
-         If set to one of the PROTOCOL_xxx values from the ssl module,
-         this value will be passed to ssl.wrap_socket() call.
+   If set to one of the PROTOCOL_xxx values from the ssl module, this
+   value will be passed to ssl.wrap_socket() call.
 
-   connection_status_only
+ * connection_status_only
 
-         If set to 1/on/true the button will not change color/label
-         based on unseen messages -- button will stay black unless
-         connection fails at which time it will turn yellow (as
-         usual).
+   If set to 1/on/true the button will not change color/label based on
+   unseen messages -- button will stay black unless connection fails
+   at which time it will turn yellow (as usual).
 
 Here is a sample .imapnotifyrc file that defines two mailboxes to be
 monitored:
 
-------------------------------.imapnotifyrc------------------------------
-[Application]
-stick = yes
-keepontop = yes
-decorated = no
+Example .imapnotifyrc
 
-[Panix]
-username = mypanixusername
-password = mypanixpassword
-server = imap.panix.com
-cmd = aterm -T mutt -n 'mutt panix' -ls -e mutt -F ~/.muttrc.panix
-delayedexpunge = yes
+    [Application]
+    stick = yes
+    keepontop = yes
+    decorated = no
+    
+    [Panix]
+    username = mypanixusername
+    password = mypanixpassword
+    server = imap.panix.com
+    cmd = aterm -T mutt -n 'mutt panix' -ls -e mutt -F ~/.muttrc.panix
+    delayedexpunge = yes
 
-[Gmail]
-username = mygmailuseranme
-password = mygmailpassword
-server = imap.gmail.com
-cmd = aterm -T 'mutt gmail' -n 'mutt gmail' -ls -e mutt -F ~/.muttrc.gmail
---------------------------------------------------------------------------
+    [Gmail]
+    username = mygmailuseranme
+    password = mygmailpassword
+    server = imap.gmail.com
+    cmd = aterm -T 'mutt gmail' -n 'mutt gmail' -ls -e mutt -F ~/.muttrc.gmail
+
+
 
