@@ -117,14 +117,14 @@ settings.
    If set to 'yes', the imapnotify window will not appear in
    desktop manager taskbars.  Default is 'no'.
 
-  * skippager
+ * skippager
 
-    If set to 'yes', the imapnotify window will not appear in
-    desktop manager pagers.  Default is 'no'.
+   If set to 'yes', the imapnotify window will not appear in
+   desktop manager pagers.  Default is 'no'.
 
-  * title
+ * title
 
-    The imapnotify window title.  Default is 'IMAP Notifier'.
+   The imapnotify window title.  Default is 'IMAP Notifier'.
 
 
 ### Mailbox Configuration Settings
