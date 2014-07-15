@@ -186,7 +186,7 @@ follows:
 Here is a sample .imapnotifyrc file that defines two mailboxes to be
 monitored:
 
-Example .imapnotifyrc
+### Example Configuration
 
     [Application]
     stick = yes
@@ -205,6 +205,3 @@ Example .imapnotifyrc
     password = mygmailpassword
     server = imap.gmail.com
     cmd = aterm -T 'mutt gmail' -n 'mutt gmail' -ls -e mutt -F ~/.muttrc.gmail
-
-
-
