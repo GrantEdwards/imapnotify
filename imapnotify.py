@@ -8,7 +8,7 @@
 #
 # http://www.gnu.org/licenses/gpl-2.0.html
 
-version = "0.21"
+version = "0.30"
 
 import pygtk
 pygtk.require('2.0')
