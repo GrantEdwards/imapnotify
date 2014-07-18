@@ -126,6 +126,18 @@ settings.
 
    The imapnotify window title.  Default is 'IMAP Notifier'.
 
+ * alert
+
+   The name of the color to use to indicate the presence of new mail
+   in a mailbox.  Default is red.  Can be anything accepted by Gtk's
+   window.get_colormap().alloc_color(color_name) call.
+
+ * badconn
+
+   The name of the color to use to indicate a failed IMAP
+   connection. Default is yellow.  Can be anything accepted by Gtk's
+   window.get_colormap().alloc_color(color_name) call.
+
 
 ### Mailbox Configuration Settings
 
