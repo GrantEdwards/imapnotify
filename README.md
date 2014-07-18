@@ -195,6 +195,13 @@ follows:
    unseen messages -- button will stay black unless connection fails
    at which time it will turn yellow (as usual).
 
+ * newonly
+
+   Button will only change to alert color and show count for unseen
+   messages that do _not_ have the \Old flag set.  Tooltip will always
+   show counts of unseen, old, and new.
+
+
 Here is a sample .imapnotifyrc file that defines two mailboxes to be
 monitored:
 

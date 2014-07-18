@@ -55,6 +55,7 @@ class Mailbox:
         self.delayedexpunge = False
         self.ssl_version = None
         self.connection_status_only = None
+        self.newonly = False
 
 class MyButton(gtk.Button):
 
@@ -122,16 +123,33 @@ class Notifier:
                         mlog(1,'delayed expunge')
                         polltime = 1
                     else:
+                        unseen,old,new = 0,0,0
                         time.sleep(0.1)
                         polltime = mailbox.polltime
                         ret, data = imap.SEARCH(None, 'UNSEEN')
                         mlog(1,"unseen: %s" % ((ret,data),))
                         if data[0] and not mailbox.connection_status_only:
-                            count = len(data[0].split())
+                            msgids = data[0].split()
+                            unseen = len(msgids)
+                            old = 0
+                            mlog(3,"unseen messages: %s" % msgids)
+                            old,new = 0,0
+                            for msgid in msgids:
+                                ret,data = imap.FETCH(int(msgid),'(FLAGS)')
+                                flags = imaplib2.ParseFlags(data[0].split(' ',1)[1])
+                                if 'Old' in flags:
+                                    old += 1
+                                    new += 1
+                            mlog(1,"old:%d  new:%d" % (old,new))
+                            if mailbox.newonly:
+                                count = new
+                            else:
+                                count = unseen
+
+                        if count:
                             suffix = " %d" % count
                             style = self.style_alert
                         else:
-                            count = 0
                             suffix = ""
                             style = self.style_normal
 
@@ -139,7 +157,7 @@ class Notifier:
                             mailbox.button.setLabelSuffix(suffix)
 
                         if tooltipsEnabled:
-                            mailbox.button.setTooltipText("%s unseen" % count)
+                            mailbox.button.setTooltipText("%d unseen: %d old, %d new" % (unseen, old, new))
 
                         mailbox.button.setLabelStyle(style)
 
@@ -284,7 +302,7 @@ config.set('Application','alert','red')
 config.set('Application','badconn','yellow')
 
 allowedApplicationOptions = [name for name,value in config.items('Application')]
-allowedMailboxOptions = ['username','password','server','polltime','boxname','cmd','delayedexpunge','ssl_version','connection_status_only']
+allowedMailboxOptions = ['username','password','server','polltime','boxname','cmd','delayedexpunge','ssl_version','connection_status_only','newonly']
 
 config.read(option.configfile)
 
