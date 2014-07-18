@@ -123,7 +123,7 @@ class Notifier:
                         mlog(1,'delayed expunge')
                         polltime = 1
                     else:
-                        unseen,old,new = 0,0,0
+                        count,unseen,old,new = 0,0,0,0
                         time.sleep(0.1)
                         polltime = mailbox.polltime
                         ret, data = imap.SEARCH(None, 'UNSEEN')
