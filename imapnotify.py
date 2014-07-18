@@ -99,7 +99,7 @@ class Notifier:
         while running:
             try:
                 mlog(1,"starting imap session")
-                mailbox.button.setLabelStyle(self.style_yellow)
+                mailbox.button.setLabelStyle(self.style_badconn)
 
                 imap = imaplib2.IMAP4_SSL(mailbox.server,identifier=mailbox.name,debug=max(0,option.verbose-1),debug_file=logfile,ssl_version=mailbox.ssl_version)
                 imap.LOGIN(mailbox.username, mailbox.password)
@@ -129,7 +129,7 @@ class Notifier:
                         if data[0] and not mailbox.connection_status_only:
                             count = len(data[0].split())
                             suffix = " %d" % count
-                            style = self.style_red
+                            style = self.style_alert
                         else:
                             count = 0
                             suffix = ""
@@ -165,7 +165,7 @@ class Notifier:
                         time.sleep(1)  # make sure we don't hog the CPU when something goes wrong.
 
             except:
-                mailbox.button.setLabelStyle(self.style_yellow)
+                mailbox.button.setLabelStyle(self.style_badconn)
                 mlog(0,"monitorMailbox got exception")
                 mlog(0,"------------------------------------------------------------")
                 mlog(0,traceback.format_exc())
@@ -179,11 +179,11 @@ class Notifier:
                     pass
 
             if running:
-                mailbox.button.setLabelStyle(self.style_yellow)
+                mailbox.button.setLabelStyle(self.style_badconn)
                 mlog(1,"connection died -- waiting 10 seconds before attempting to re-connect")
                 time.sleep(10) # don't attempt to re-connect too frequently
 
-        mailbox.button.setLabelStyle(self.style_yellow)
+        mailbox.button.setLabelStyle(self.style_badconn)
         mlog(1,"monitorMailbox terminating")
 
     def runcmd(self, mailbox):
@@ -241,14 +241,14 @@ class Notifier:
         self.box = gtk.VBox(False, 0)
         self.window.add(self.box)
 
-        red = self.window.get_colormap().alloc_color("red")
-        yellow = self.window.get_colormap().alloc_color("yellow")
+        alert_color = self.window.get_colormap().alloc_color(alert_color_name)
+        badconn_color = self.window.get_colormap().alloc_color(badconn_color_name)
         self.style_normal = gtk.Button("").get_style().copy()
-        self.style_red = self.style_normal.copy()
-        self.style_yellow = self.style_normal.copy()
+        self.style_alert = self.style_normal.copy()
+        self.style_badconn = self.style_normal.copy()
         for s in gtk.STATE_NORMAL,gtk.STATE_ACTIVE,gtk.STATE_SELECTED,gtk.STATE_PRELIGHT:
-            self.style_red.fg[s] = red
-            self.style_yellow.fg[s] = yellow
+            self.style_alert.fg[s] = alert_color
+            self.style_badconn.fg[s] = badconn_color
 
         self.button = {}
         for mailbox in mailboxes:
@@ -280,6 +280,8 @@ config.set('Application','keeponbottom','no')
 config.set('Application','skiptaskbar','no')
 config.set('Application','skippager','no')
 config.set('Application','title','IMAP Notifier')
+config.set('Application','alert','red')
+config.set('Application','badconn','yellow')
 
 allowedApplicationOptions = [name for name,value in config.items('Application')]
 allowedMailboxOptions = ['username','password','server','polltime','boxname','cmd','delayedexpunge','ssl_version','connection_status_only']
@@ -293,6 +295,9 @@ for name,value in config.items('Application'):
 
 tooltipsEnabled = config.getboolean('Application','tooltips')
 showcountEnabled = config.getboolean('Application','showcount')
+
+alert_color_name = config.get('Application','alert')
+badconn_color_name = config.get('Application','badconn')
 
 mailboxes = []
 
