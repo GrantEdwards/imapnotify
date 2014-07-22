@@ -8,7 +8,7 @@
 #
 # http://www.gnu.org/licenses/gpl-2.0.html
 
-version = "0.31"
+version = "0.32"
 
 import pygtk
 pygtk.require('2.0')
@@ -139,6 +139,7 @@ class Notifier:
                                 flags = imaplib2.ParseFlags(data[0].split(' ',1)[1])
                                 if 'Old' in flags:
                                     old += 1
+                                else:
                                     new += 1
                             mlog(1,"old:%d  new:%d" % (old,new))
                             if mailbox.newonly:
